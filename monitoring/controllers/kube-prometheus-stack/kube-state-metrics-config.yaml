@@ -77,27 +77,32 @@ kube-state-metrics:
               - name: "helmrelease_version_info"
                 help: "The version information of HelmRelease resource."
                 each:
-                  type: Info
-                  info:
-                    labelsFromPath:
-                      chart_version: [ status, history, "0", chartVersion ]
-                      app_version: [ status, history, "0", appVersion ]
-                      chart_name: [ status, history, "0", chartName ]
+                  type: Gauge
+                  gauge:
+                    path: [status, observedGeneration]
                 labelsFromPath:
                   name: [ metadata, name ]
                   exported_namespace: [ metadata, namespace ]
+                  chart_version: [ status, history, "0", chartVersion ]
+                  app_version: [ status, history, "0", appVersion ]
+                  chart_name: [ status, history, "0", chartName ]
                   chart_ref_name: [ spec, chartRef, name ]
                   chart_source_name: [ spec, chart, spec, sourceRef, name ]
-              - name: "helmrelease_upgrade_info"
-                help: "The upgrade and rollback information of HelmRelease resource."
+              - name: "helmrelease_install_failures"
+                help: "Number of install failures for HelmRelease resource."
                 each:
-                  type: Info
-                  info:
-                    labelsFromPath:
-                      install_failures: [ status, installFailures ]
-                      upgrade_failures: [ status, upgradeFailures ]
-                      last_attempted_revision: [ status, lastAttemptedRevision ]
-                      last_applied_revision: [ status, lastAppliedRevision ]
+                  type: Gauge
+                  gauge:
+                    path: [status, installFailures]
+                labelsFromPath:
+                  name: [ metadata, name ]
+                  exported_namespace: [ metadata, namespace ]
+              - name: "helmrelease_upgrade_failures"
+                help: "Number of upgrade failures for HelmRelease resource."
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, upgradeFailures]
                 labelsFromPath:
                   name: [ metadata, name ]
                   exported_namespace: [ metadata, namespace ]
