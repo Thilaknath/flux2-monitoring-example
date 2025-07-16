@@ -1,0 +1,127 @@
+---
+# Service for Dynatrace to scrape Flux controller metrics
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-helm-controller-metrics
+  namespace: flux-system
+  annotations:
+    metrics.dynatrace.com/scrape: "true"
+    metrics.dynatrace.com/port: "8080"
+    metrics.dynatrace.com/path: "/metrics"
+  labels:
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/component: monitoring
+spec:
+  ports:
+    - name: http-prom
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: helm-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-source-controller-metrics
+  namespace: flux-system
+  annotations:
+    metrics.dynatrace.com/scrape: "true"
+    metrics.dynatrace.com/port: "8080"
+    metrics.dynatrace.com/path: "/metrics"
+  labels:
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/component: monitoring
+spec:
+  ports:
+    - name: http-prom
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: source-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-kustomize-controller-metrics
+  namespace: flux-system
+  annotations:
+    metrics.dynatrace.com/scrape: "true"
+    metrics.dynatrace.com/port: "8080"
+    metrics.dynatrace.com/path: "/metrics"
+  labels:
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/component: monitoring
+spec:
+  ports:
+    - name: http-prom
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: kustomize-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-notification-controller-metrics
+  namespace: flux-system
+  annotations:
+    metrics.dynatrace.com/scrape: "true"
+    metrics.dynatrace.com/port: "8080"
+    metrics.dynatrace.com/path: "/metrics"
+  labels:
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/component: monitoring
+spec:
+  ports:
+    - name: http-prom
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: notification-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-image-automation-controller-metrics
+  namespace: flux-system
+  annotations:
+    metrics.dynatrace.com/scrape: "true"
+    metrics.dynatrace.com/port: "8080"
+    metrics.dynatrace.com/path: "/metrics"
+  labels:
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/component: monitoring
+spec:
+  ports:
+    - name: http-prom
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: image-automation-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-image-reflector-controller-metrics
+  namespace: flux-system
+  annotations:
+    metrics.dynatrace.com/scrape: "true"
+    metrics.dynatrace.com/port: "8080"
+    metrics.dynatrace.com/path: "/metrics"
+  labels:
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/component: monitoring
+spec:
+  ports:
+    - name: http-prom
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: image-reflector-controller
