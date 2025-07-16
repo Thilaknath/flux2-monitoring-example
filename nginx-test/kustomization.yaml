@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: test-managementzones
 resources:
   - namespace.yaml
-  - bitnami-repository.yaml
+  - ingress-nginx-repository.yaml
   - nginx-release.yaml
