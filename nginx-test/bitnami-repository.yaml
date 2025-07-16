@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: nginx-stable
+  name: stable
   namespace: test-managementzones
 spec:
   interval: 1h
-  url: https://helm.nginx.com/stable
+  url: https://charts.helm.sh/stable

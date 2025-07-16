@@ -8,17 +8,14 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: nginx-ingress
-      version: ">=0.15.0"
+      chart: nginx
+      version: "1.1.3"
       sourceRef:
         kind: HelmRepository
-        name: nginx-stable
+        name: stable
         namespace: test-managementzones
       interval: 1m
   install:
     createNamespace: true
   values:
-    controller:
-      replicaCount: 1
-      service:
-        type: ClusterIP
+    replicaCount: 1
