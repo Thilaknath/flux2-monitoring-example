@@ -74,6 +74,33 @@ kube-state-metrics:
                   chart_app_version: [ status, history, "0", appVersion ]
                   chart_ref_name: [ spec, chartRef, name ]
                   chart_source_name: [ spec, chart, spec, sourceRef, name ]
+              - name: "helmrelease_version_info"
+                help: "The version information of HelmRelease resource."
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      chart_version: [ status, history, "0", chartVersion ]
+                      app_version: [ status, history, "0", appVersion ]
+                      chart_name: [ status, history, "0", chartName ]
+                labelsFromPath:
+                  name: [ metadata, name ]
+                  exported_namespace: [ metadata, namespace ]
+                  chart_ref_name: [ spec, chartRef, name ]
+                  chart_source_name: [ spec, chart, spec, sourceRef, name ]
+              - name: "helmrelease_upgrade_info"
+                help: "The upgrade and rollback information of HelmRelease resource."
+                each:
+                  type: Info
+                  info:
+                    labelsFromPath:
+                      install_failures: [ status, installFailures ]
+                      upgrade_failures: [ status, upgradeFailures ]
+                      last_attempted_revision: [ status, lastAttemptedRevision ]
+                      last_applied_revision: [ status, lastAppliedRevision ]
+                labelsFromPath:
+                  name: [ metadata, name ]
+                  exported_namespace: [ metadata, namespace ]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
